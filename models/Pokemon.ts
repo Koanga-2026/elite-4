@@ -16,10 +16,13 @@ export interface Apilink {
 }
 
 export interface Pokemon {
-sprites: {
-  front_default: string | null
-  back_default: string | null
-}eight: number
+  id: number
+  name: string
+  sprites: {
+    front_default: string | null
+    back_default: string | null
+  }
+  eight: number
   base_experience: number | null
   sprites: {
     front_default: string
