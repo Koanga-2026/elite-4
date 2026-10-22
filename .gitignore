@@ -42,3 +42,6 @@ dev.sqlite3
 
 # Promptkit repository
 promptkit
+
+# API keys
+.env
