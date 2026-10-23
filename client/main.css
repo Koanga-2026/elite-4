@@ -1,7 +1,6 @@
 /* Import a fun, clean gaming font */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
 
-/* --- Brighter Pokémon-Themed Background --- */
 body {
   background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 50%, #2563eb 100%);
   font-family: 'Fredoka', cursive, sans-serif;
@@ -36,7 +35,7 @@ body {
 /* Pokedex aesthetic top strip */
 .pokedex-header-strip {
   height: 28px;
-  background: #ff1c1c; /* Vibrant Pokéball Red */
+  background: #ff1c1c;
   border-bottom: 4px solid #1f2937;
   position: relative;
 }
@@ -56,8 +55,8 @@ body {
 
 .NavHeader {
   font-size: 2.4rem;
-  color: #3b4cca; /* Classic Pokémon Blue */
-  text-shadow: 2px 2px 0px #ffde00; /* Pokémon Yellow drop shadow */
+  color: #3b4cca;
+  text-shadow: 2px 2px 0px #ffde00;
   margin: 1.8rem 0 1.2rem 0;
   letter-spacing: 1px;
   text-align: left;
@@ -242,12 +241,11 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(234, 179, 8, 0.4);
 }
-/* --- Pokémon Details Specific Styles --- */
 
 .pokemon-details-title {
   font-size: 2.4rem;
-  color: #3b4cca; /* Classic Pokémon Blue */
-  text-shadow: 2px 2px 0px #ffde00; /* Pokémon Yellow drop shadow */
+  color: #3b4cca;
+  text-shadow: 2px 2px 0px #ffde00;
   margin: 1.8rem 0 0.2rem 0;
   text-transform: capitalize;
   text-align: center;
@@ -281,7 +279,6 @@ body {
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
 }
 
-/* Types List Styling */
 .pokemon-types-container {
   display: flex;
   gap: 0.75rem;
@@ -357,14 +354,12 @@ body {
   color: #1f2937;
 }
 
-/* Panels Wrapper */
 .pokemon-info-panels {
   width: 88%;
   margin: 0 auto 1.8rem auto;
   text-align: center;
 }
 
-/* Style any buttons rendered inside StatsPanel or AddToTeam to match your theme */
 .pokemon-info-panels button,
 .pokemon-info-panels input[type='submit'] {
   background: linear-gradient(to bottom, #ffde00, #facc15);
@@ -387,7 +382,6 @@ body {
   box-shadow: 0 6px 14px rgba(234, 179, 8, 0.4);
 }
 
-/* Remove bullet points and reset list padding */
 .pokemon-info-panels ul,
 .pokemon-info-panels ol {
   list-style: none;
@@ -395,7 +389,6 @@ body {
   margin: 0;
 }
 
-/* Ensure list items inside stats/team panels are centered and clean */
 .pokemon-info-panels li {
   list-style-type: none;
   margin: 0.5rem 0;
@@ -414,8 +407,8 @@ body {
 
 .legendary-filter h3 {
   font-size: 1.8rem;
-  color: #3b4cca; /* Classic Pokémon Blue */
-  text-shadow: 2px 2px 0px #ffde00; /* Pokémon Yellow drop shadow */
+  color: #3b4cca;
+  text-shadow: 2px 2px 0px #ffde00;
   margin-top: 0;
   margin-bottom: 1rem;
   letter-spacing: 0.5px;
@@ -439,7 +432,6 @@ body {
   cursor: pointer;
 }
 
-/* Legendary Results List & Badges (No Bullet Points) */
 .legendary-results ul {
   list-style: none;
   padding: 0;
@@ -452,12 +444,587 @@ body {
   overflow-y: auto;
 }
 
-.legendary-results li {
-  list-style-type: none;
-}
-
 .legendary-results li a {
   display: inline-block;
   padding: 0.4rem 1.1rem;
-  background:;
+  background: #ffffff;
+  color: #3b4cca;
+  border: 2px solid #d946ef;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.legendary-results li a:hover {
+  background: #d946ef;
+  color: #ffffff;
+}
+
+/* =========================================================
+   TEAM PAGE BACKGROUND EFFECTS
+   `body:has(.team ...)` means "only apply this when the Team
+   page is on screen", so your Home page stays exactly the same
+   ========================================================= */
+
+/* ---------- 1. Shifting sky ----------
+   The blue gradient slowly moves, like the sky over a Pokémon route */
+body:has(.team, .team-loading, .team-error) {
+  background: linear-gradient(
+    135deg,
+    #00d2ff,
+    #3a7bd5,
+    #2563eb,
+    #7c3aed,
+    #00d2ff
+  );
+  background-size: 400% 400%;
+  animation: sky-shift 18s ease infinite;
+}
+
+@keyframes sky-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ---------- 2. Drifting Pokéballs ----------
+   Faint Pokéballs tiled across the whole screen, slowly floating diagonally */
+body:has(.team, .team-loading, .team-error)::before {
+  content: '';
+  position: fixed;
+  inset: 0; /* cover the whole screen */
+  pointer-events: none; /* clicks pass straight through */
+  z-index: 0;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='white' stroke='%231f2937' stroke-width='6'/%3E%3Cpath d='M6 50a44 44 0 0 1 88 0z' fill='%23ff1c1c' stroke='%231f2937' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='13' fill='white' stroke='%231f2937' stroke-width='6'/%3E%3C/svg%3E");
+  background-size: 90px 90px;
+  animation: pokeballs-drift 30s linear infinite;
+}
+
+@keyframes pokeballs-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 180px 180px;
+  }
+}
+
+/* ---------- 3. Giant spinning Pokéball ----------
+   A big faded Pokéball slowly rotates in the bottom-right corner */
+body:has(.team, .team-loading, .team-error)::after {
+  content: '';
+  position: fixed;
+  right: -120px;
+  bottom: -120px;
+  width: 420px;
+  height: 420px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='white' stroke='%231f2937' stroke-width='4'/%3E%3Cpath d='M6 50a44 44 0 0 1 88 0z' fill='%23ff1c1c' stroke='%231f2937' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='13' fill='white' stroke='%231f2937' stroke-width='4'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  animation: big-spin 40s linear infinite;
+}
+
+@keyframes big-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- 4. Electric sparkles ----------
+   Tiny glowing dots that twinkle and rise, like Pikachu's sparks */
+html:has(.team, .team-loading, .team-error)::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(circle, #ffde00 0 2px, transparent 3px),
+    radial-gradient(circle, #ffffff 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, #fde047 0 1px, transparent 2px);
+  background-size:
+    160px 160px,
+    110px 110px,
+    70px 70px;
+  background-position:
+    0 0,
+    40px 60px,
+    20px 30px;
+  animation:
+    sparks-rise 12s linear infinite,
+    sparks-twinkle 2s ease-in-out infinite;
+}
+
+@keyframes sparks-rise {
+  from {
+    background-position:
+      0 0,
+      40px 60px,
+      20px 30px;
+  }
+  to {
+    background-position:
+      0 -160px,
+      40px -50px,
+      20px -40px;
+  }
+}
+
+@keyframes sparks-twinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* ---------- Keep the Team card above the background layers ---------- */
+.team,
+.team-loading,
+.team-error {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Reduced motion: keep the look, stop the movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  body:has(.team, .team-loading, .team-error),
+  body:has(.team, .team-loading, .team-error)::before,
+  body:has(.team, .team-loading, .team-error)::after,
+  html:has(.team, .team-loading, .team-error)::before {
+    animation: none !important;
+  }
+}
+/* =========================================================
+   POKÉMON TEAM CARDS — CSS ONLY
+   Styles each slot inside .team-slots as a trading-card style
+   Pokémon card, no component changes needed
+   ========================================================= */
+
+/* ---------- The card ---------- */
+.team-slots > * {
+  position: relative;
+  overflow: hidden;
+  justify-content: flex-start;
+  min-height: 200px;
+  padding: 2.6rem 0.6rem 0.9rem; /* top space for the coloured band */
+  border: 3px solid #1f2937;
+  border-radius: 16px;
+  color: #1f2937;
+  text-decoration: none;
+  /* White card with a faint Pokéball watermark in the bottom-right */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='none' stroke='%23e2e8f0' stroke-width='6'/%3E%3Cpath d='M6 50h88' stroke='%23e2e8f0' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='13' fill='white' stroke='%23e2e8f0' stroke-width='6'/%3E%3C/svg%3E")
+      right -20px bottom -20px / 110px no-repeat,
+    #ffffff;
+}
+
+/* ---------- Coloured band across the top ---------- */
+.team-slots > *::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 42px;
+  border-bottom: 3px solid #1f2937;
+  background: #ff1c1c;
+}
+
+/* Each slot gets its own Pokémon-type colour */
+.team-slots > *:nth-child(1)::before {
+  background: #f08030;
+} /* fire */
+.team-slots > *:nth-child(2)::before {
+  background: #6890f0;
+} /* water */
+.team-slots > *:nth-child(3)::before {
+  background: #78c850;
+} /* grass */
+.team-slots > *:nth-child(4)::before {
+  background: #f8d030;
+} /* electric */
+.team-slots > *:nth-child(5)::before {
+  background: #f85888;
+} /* psychic */
+.team-slots > *:nth-child(6)::before {
+  background: #7038f8;
+} /* dragon */
+
+/* ---------- Pokémon image in a circle, overlapping the band ---------- */
+.team-slots > * img {
+  position: relative; /* sits above the band */
+  z-index: 1;
+  width: 84px;
+  height: 84px;
+  margin-top: -1.6rem; /* pulls it up over the band */
+  padding: 6px;
+  background: linear-gradient(to bottom, #eff6ff, #dbeafe);
+  border: 3px solid #3b4cca;
+  border-radius: 50%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  object-fit: contain;
+}
+
+/* ---------- Name ---------- */
+.team-slots > * :is(h2, h3, h4) {
+  margin: 0.5rem 0 0.3rem;
+  font-size: 1.2rem;
+  color: #3b4cca;
+  text-shadow: 1px 1px 0 #ffde00;
+  text-transform: capitalize;
+}
+
+/* ---------- Any other text (types, stats, etc.) ---------- */
+.team-slots > * p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: capitalize;
+}
+
+/* Buttons inside a card (e.g. a Remove button) */
+.team-slots > * button {
+  margin-top: auto; /* pushes the button to the bottom */
+  padding: 0.35rem 1rem;
+  background: linear-gradient(to bottom, #ffde00, #facc15);
+  color: #1e3a8a;
+  border: 2px solid #1f2937;
+  border-radius: 50px;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.team-slots > * button:hover {
+  transform: scale(1.08);
+}
+
+/* ---------- Shine sweep on hover ---------- */
+.team-slots > *::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.team-slots > *:hover::after {
+  left: 140%;
+}
+
+/* =========================================================
+   EMPTY SLOTS
+   :not(:has(img)) means "a slot with no Pokémon image inside"
+   ========================================================= */
+.team-slots > *:not(:has(img)) {
+  justify-content: center;
+  padding: 1rem;
+  border: 3px dashed #94a3b8;
+  color: #94a3b8;
+  /* Faded full-colour Pokéball in the middle */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='white' stroke='%231f2937' stroke-width='6'/%3E%3Cpath d='M6 50a44 44 0 0 1 88 0z' fill='%23ff1c1c' stroke='%231f2937' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='13' fill='white' stroke='%231f2937' stroke-width='6'/%3E%3C/svg%3E")
+      center / 56px no-repeat,
+    rgba(255, 255, 255, 0.6);
+  opacity: 0.6;
+}
+
+/* No band, no shine, no lift on empty slots */
+.team-slots > *:not(:has(img))::before,
+.team-slots > *:not(:has(img))::after {
+  display: none;
+}
+
+.team-slots > *:not(:has(img)):hover {
+  transform: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================
+   TEAM PAGE LAYOUT (missing pieces)
+   ========================================================= */
+
+/* Main card: same look as the Home .homeDetail card */
+.team {
+  max-width: 650px;
+  width: calc(100% - 2rem);
+  margin: 2.5rem auto;
+  padding: 0 0 2rem;
+  background: #ffffff;
+  border: 4px solid #1f2937;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Red Pokédex strip across the top */
+.team::before {
+  content: '';
+  display: block;
+  height: 28px;
+  background: #ff1c1c;
+  border-bottom: 4px solid #1f2937;
+}
+
+/* Blinking blue light on the strip */
+.team::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  background: #38bdf8;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  animation: dex-light 1.5s ease-in-out infinite;
+}
+
+@keyframes dex-light {
+  0%,
+  100% {
+    box-shadow: 0 0 4px #38bdf8;
+    opacity: 0.7;
+  }
+  50% {
+    box-shadow: 0 0 16px #38bdf8;
+    opacity: 1;
+  }
+}
+
+/* "Your team" heading with electric flicker */
+.team-title {
+  font-size: 2.4rem;
+  color: #3b4cca;
+  text-shadow: 2px 2px 0 #ffde00;
+  margin: 1.8rem 0 0.8rem;
+  letter-spacing: 1px;
+  animation: electric-flicker 4s linear infinite;
+}
+
+@keyframes electric-flicker {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
+    text-shadow:
+      2px 2px 0 #ffde00,
+      0 0 12px #facc15;
+  }
+  20%,
+  24%,
+  55% {
+    text-shadow: 2px 2px 0 #ffde00;
+  }
+}
+
+/* "3 / 6" counter */
+.team-count {
+  display: inline-block;
+  margin: 0 0 1.5rem;
+  padding: 0.4rem 1.4rem;
+  background: linear-gradient(to bottom, #ffde00, #facc15);
+  color: #1e3a8a;
+  border: 3px solid #1f2937;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* Grid: 3 cards per row */
+.team-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 88%;
+  margin: 0 auto;
+}
+
+/* Layout inside each card (centres the image and name) + pop-in */
+.team-slots > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  animation: pokemon-release 0.6s ease-out backwards;
+}
+
+@keyframes pokemon-release {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+    filter: brightness(3);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: brightness(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+.team-slots > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.team-slots > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.team-slots > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.team-slots > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.team-slots > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.team-slots > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Hover: lift with a yellow glow */
+.team-slots > *:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow:
+    0 0 0 3px #ffde00,
+    0 10px 20px rgba(59, 76, 202, 0.3);
+}
+
+/* Loading and error messages */
+.team-loading {
+  display: block;
+  margin: 3rem auto;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+}
+
+.team-error {
+  display: block;
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 1rem;
+  background: #fff;
+  color: #c03028;
+  font-weight: 700;
+  text-align: center;
+  border: 3px solid #c03028;
+  border-radius: 16px;
+}
+
+/* ---------- Home Pokéball button ---------- */
+.team-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.team-nav__ball {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.team-nav__ball:hover {
+  transform: scale(1.15) rotate(15deg);
+}
+
+.team-nav .pokeball {
+  width: 56px;
+  height: 56px;
+}
+
+.team-nav .pokeball__button {
+  width: 18px;
+  height: 18px;
+}
+
+.team-nav__ball:hover .pokeball__button {
+  box-shadow: 0 0 10px 4px rgba(253, 224, 71, 0.9);
+}
+
+.team-nav__label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #3b4cca;
+  text-shadow: 1px 1px 0 #ffde00;
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 600px) {
+  .team-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .team-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .team-slots {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .team *,
+  .team::after {
+    animation: none !important;
+  }
 }
