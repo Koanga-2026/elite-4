@@ -33,3 +33,9 @@ export interface Pokemon {
   types: Array<TypeInfo>
   stats: Array<Stat>
 }
+
+export interface PokemonSpecies {
+  name: string
+  is_legendary: boolean
+  is_mythical: boolean
+}
