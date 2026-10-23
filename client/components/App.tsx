@@ -1,11 +1,33 @@
-import { Outlet } from 'react-router'
+import { Link, Outlet, useLocation } from 'react-router'
 
 function App() {
+  const { pathname } = useLocation() // current URL path, e.g. "/", "/team"
+  const isHome = pathname === '/'
+
   return (
-    <div>
-      <h1>ELITE 4 POKÉ-TEAMS</h1>
-      <Outlet />
-    </div>
+    <>
+      {/* HEADER: shows on every page */}
+      <header>
+        <h1>Elite Four Pokédex</h1>
+
+        {/* NAV: only shows when we're NOT on the home page */}
+        {!isHome && (
+          <nav>
+            <Link to="/" className="team-button">
+              Kāinga
+            </Link>
+            <Link to="/team" className="team-button">
+              My Team
+            </Link>
+          </nav>
+        )}
+      </header>
+
+      {/* The current page (Home, PokemonDetails or Team) renders here */}
+      <main>
+        <Outlet />
+      </main>
+    </>
   )
 }
 
