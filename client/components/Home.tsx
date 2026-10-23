@@ -1,38 +1,49 @@
-import { useQuery, useState } from '@tanstack/react-query'
-import { PokemonDetails } from '../components/PokemonDetails.tsx'
-import { fetchPokemonByName } from '../apis/pokemon.ts'
-import 
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router'
 
-//WHAT DO WE. WANT TO SEE ON THE HOMEPAGE
-//1. Search box - search pokemon
-//2. BUTTON (reads "Click here to get your team") - Link to "team" page
+//WHAT DO WE WANT TO SEE ON THE HOMEPAGE
+//1. Search box - search pokemon (goes to /pokemon/:name)
+//2. LINK (styled like a button, reads "Are you ready for your dream team?") - goes to "team" page
 //3. write <p> to explain the app
 
 function Home() {
   const [search, setSearch] = useState('')
-  const [name, setName] = useState('')
-
-  const { data: pokemon, isPending, isError } = useQuery({
-    queryKey: ['pokemon', name],
-    queryFn: () => fetchPokemonbyName(name),
-    enabled: name !== '',
-  })
+  const navigate = useNavigate()
 
   function handleSubmit(e: React.FormEvent) {
-  e.preventDefault()
-  if (search.trim()) setName(search.trim())
+    e.preventDefault()
+    if (search.trim()) navigate(`/pokemon/${search.trim().toLowerCase()}`)
   }
 
   return (
     <div>
-      
       <h2>🐭 Home</h2>
-      <p>React development has begun!</p>
-    
-    <button onClick={() => Navigate('/')}>
-      Are you ready for your team?
-      </button>
-      </div>
+
+      {/* 3. Explain the app */}
+      <p>
+        Build your dream Pokémon team! Search for any Pokémon by name to see its
+        stats and type, then add it to your team. You can have up to 6 Pokémon
+        on your team at a time.
+      </p>
+
+      {/* 2. Link to the team page */}
+      <Link to="/team" className="team-button">
+        Are you ready for your dream team?
+      </Link>
+
+      {/* 1. Search box */}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="search">Pokémon name: </label>
+        <input
+          id="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="e.g. charmander"
+        />
+        <button type="submit">Search</button>
+        Are you ready for your dream team?
+      </form>
+    </div>
   )
 }
 
