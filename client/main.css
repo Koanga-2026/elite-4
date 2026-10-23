@@ -400,3 +400,64 @@ body {
   list-style-type: none;
   margin: 0.5rem 0;
 }
+/* --- Legendary Pokémon Filter Section --- */
+.legendary-filter {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, #fdf4ff, #fae8ff);
+  border-radius: 16px;
+  border: 2px solid #d946ef;
+  width: 88%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.legendary-filter h3 {
+  font-size: 1.8rem;
+  color: #3b4cca; /* Classic Pokémon Blue */
+  text-shadow: 2px 2px 0px #ffde00; /* Pokémon Yellow drop shadow */
+  margin-top: 0;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.legendary-filter label {
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.legendary-filter input[type='checkbox'] {
+  accent-color: #3b4cca;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Legendary Results List & Badges (No Bullet Points) */
+.legendary-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.legendary-results li {
+  list-style-type: none;
+}
+
+.legendary-results li a {
+  display: inline-block;
+  padding: 0.4rem 1.1rem;
+  background:;
+}

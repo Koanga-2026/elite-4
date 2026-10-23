@@ -35,6 +35,7 @@ export interface Pokemon {
 }
 
 export interface PokemonSpecies {
+  id: number
   name: string
   is_legendary: boolean
   is_mythical: boolean

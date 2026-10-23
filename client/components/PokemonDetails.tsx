@@ -39,7 +39,7 @@ function PokemonDetails() {
             className="app-description"
             style={{ margin: '3rem 0', color: '#dc2626' }}
           >
-            Couldn't find that Pokémon! Check the spelling and try again.
+            {"Couldn't find that Pokémon! Check the spelling and try again."}
           </p>
           <Link
             to="/"
@@ -96,12 +96,33 @@ function PokemonDetails() {
           <AddToTeam name={pokemon.name} />
         </div>
 
-        {/* Navigation back home */}
-        <div style={{ paddingBottom: '2.5rem' }}>
+        {/* Navigation Buttons ("My team" & "Back to Search") */}
+        <div
+          style={{
+            paddingBottom: '2.5rem',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Link
+            to="/team"
+            className="pokemon-search-btn"
+            style={{
+              textDecoration: 'none',
+              display: 'inline-block',
+            }}
+          >
+            My team
+          </Link>
           <Link
             to="/"
             className="pokemon-search-btn"
-            style={{ textDecoration: 'none', display: 'inline-block' }}
+            style={{
+              textDecoration: 'none',
+              display: 'inline-block',
+            }}
           >
             Back to Search
           </Link>

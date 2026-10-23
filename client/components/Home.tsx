@@ -87,7 +87,13 @@ function Home() {
                   {legendaryPokemon.map((pokemon) => (
                     <li key={pokemon.name}>
                       <Link to={`/pokemon/${pokemon.name}`}>
-                        {pokemon.name.replace(/-/g, ' ')}
+                        <img
+                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                          alt={pokemon.name}
+                          width="96"
+                          height="96"
+                        />
+                        <span>{pokemon.name.replace(/-/g, ' ')}</span>
                       </Link>
                     </li>
                   ))}
