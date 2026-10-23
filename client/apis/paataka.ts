@@ -9,7 +9,7 @@ export const MAX_TEAM_SIZE = 6
 
 export async function getTeam(): Promise<TeamMember[]> {
   const res = await request.get(BASE_URL).auth(TOKEN, { type: 'bearer' })
-  return res.body
+  return Array.isArray(res.body) ? res.body : res.body.items
 }
 
 export async function addToTeam(member: NewTeamMember): Promise<void> {
