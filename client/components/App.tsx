@@ -7,17 +7,14 @@ function App() {
   return (
     <>
       {/* HEADER: shows on every page */}
-      <header>
+      <header className="NavHeader">
         <h1>Elite Four Pokédex</h1>
 
         {/* NAV: only shows when we're NOT on the home page */}
         {!isHome && (
           <nav>
             <Link to="/" className="team-button">
-              Kāinga
-            </Link>
-            <Link to="/team" className="team-button">
-              My Team
+              Home
             </Link>
           </nav>
         )}
