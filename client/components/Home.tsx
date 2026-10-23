@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-
-//WHAT DO WE WANT TO SEE ON THE HOMEPAGE
-//1. Search box - search pokemon (goes to /pokemon/:name)
-//2. LINK (styled like a button, reads "Are you ready for your dream team?") - goes to "team" page
-//3. write <p> to explain the app
+import useLegendaryPokemon from '../hooks/useLegendaryPokemon.ts'
 
 function Home() {
   const [search, setSearch] = useState('')
+  const [showLegendaries, setShowLegendaries] = useState(false)
   const navigate = useNavigate()
+
+  const {
+    pokemon: legendaryPokemon,
+    isLoading,
+    error,
+  } = useLegendaryPokemon(showLegendaries)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -19,19 +22,16 @@ function Home() {
     <div>
       <h2>🐭 Home</h2>
 
-      {/* 3. Explain the app */}
       <p>
         Build your dream Pokémon team! Search for any Pokémon by name to see its
         stats and type, then add it to your team. You can have up to 6 Pokémon
         on your team at a time.
       </p>
 
-      {/* 2. Link to the team page */}
       <Link to="/team" className="team-button">
         Are you ready for your dream team?
       </Link>
 
-      {/* 1. Search box */}
       <form onSubmit={handleSubmit}>
         <label htmlFor="search">Pokémon name: </label>
         <input
@@ -41,8 +41,37 @@ function Home() {
           placeholder="e.g. charmander"
         />
         <button type="submit">Search</button>
-        Are you ready for your dream team?
       </form>
+
+      <section>
+        <h3>Legendary Pokémon</h3>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={showLegendaries}
+            onChange={(e) => setShowLegendaries(e.target.checked)}
+          />
+          Show Legendary Pokémon
+        </label>
+
+        {showLegendaries && (
+          <div>
+            {isLoading && <p>Loading legendary Pokémon...</p>}
+            {error && <p>{error}</p>}
+
+            {!isLoading && !error && (
+              <ul>
+                {legendaryPokemon.map((pokemon) => (
+                  <li key={pokemon.name}>
+                    <Link to={`/pokemon/${pokemon.name}`}>{pokemon.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </section>
     </div>
   )
 }
