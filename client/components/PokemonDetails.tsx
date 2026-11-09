@@ -93,7 +93,14 @@ function PokemonDetails() {
         {/* Stats and Add to Team Panels */}
         <div className="pokemon-info-panels">
           <StatsPanel stats={pokemon.stats} />
-          <AddToTeam name={pokemon.name} />
+          <AddToTeam
+            member={{
+              name: pokemon.name,
+              pokemonId: pokemon.id,
+              sprite: pokemon.sprites.front_default ?? '', //fallback to empty string if null
+              types: pokemon.types.map((t) => t.type.name),
+            }}
+          />
         </div>
 
         {/* Navigation Buttons ("My team" & "Back to Search") */}
