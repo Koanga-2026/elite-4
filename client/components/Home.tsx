@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import useLegendaryPokemon from '../hooks/useLegendaryPokemon.ts'
+import bannerImage from '../src/assets/trainer-banner.webp'
+import ash from '../src/assets/Pokemon-Ash-Ketchum.webp'
 
 function Home() {
   const [search, setSearch] = useState('')
@@ -25,9 +27,30 @@ function Home() {
 
         <h2>⚡ Pokédex Central ⚡</h2>
 
+        {/* Ash Ketchum welcome avatar */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '1rem 0',
+          }}
+        >
+          <img
+            src={ash}
+            alt="Ash Ketchum trainer avatar"
+            style={{
+              width: '80px',
+              height: '80px',
+              objectFit: 'contain',
+              borderRadius: '50%',
+              border: '2px solid #1f2937',
+            }}
+          />
+        </div>
+
         <div className="trainer-banner-container">
           <img
-            src="https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?q=80&w=1000&auto=format&fit=crop"
+            src={bannerImage}
             alt="Pokémon trainer and Pokémon banner"
             className="trainer-group-image"
           />
@@ -49,8 +72,13 @@ function Home() {
         </div>
 
         <form onSubmit={handleSubmit} className="search-form">
+          <label htmlFor="search" className="sr-only">
+            Search Pokemon
+          </label>
           <div className="search-input-wrapper">
-            <span className="search-icon">🔍</span>
+            <span className="search-icon" aria-hidden="true">
+              🔍
+            </span>
             <input
               id="search"
               value={search}

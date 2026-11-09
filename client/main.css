@@ -286,11 +286,13 @@ body {
   margin-bottom: 1.8rem;
 }
 
+/*previously had whitetext to all badges so any type with a lighter background fails contrast check in WAVE extension - making text darker*/
+
 .type-badge {
   font-size: 0.85rem;
   padding: 0.4rem 1.2rem;
   border-radius: 50px;
-  color: #fff;
+  color: #1f2937; /* changed from #fff to dark colour */
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -1027,4 +1029,16 @@ html:has(.team, .team-loading, .team-error)::before {
   .team::after {
     animation: none !important;
   }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
