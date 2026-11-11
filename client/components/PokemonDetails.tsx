@@ -65,7 +65,7 @@ function PokemonDetails() {
 
         {/* Pokémon Name & ID */}
         <h2 className="pokemon-details-title">{pokemon.name}</h2>
-        <p className="pokemon-details-id">#{pokemon.id}</p>
+        <h3 className="pokemon-details-id">#{pokemon.id}</h3>
 
         {/* Sprite Image Container */}
         {pokemon.sprites.front_default && (

@@ -11,10 +11,15 @@ function StatsPanel({ stats }: Props) {
       <ul>
         {stats.map((s) => (
           <li key={s.stat.name}>
-            <label>
+            {/* change from <label> to <span> / add aria label for readibility  */}
+            <span>
               {s.stat.name}: {s.base_stat}{' '}
-              <progress value={s.base_stat} max={255} />
-            </label>
+              <progress
+                value={s.base_stat}
+                max={255}
+                aria-label={s.stat.name}
+              />
+            </span>
           </li>
         ))}
       </ul>

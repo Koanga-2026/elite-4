@@ -63,7 +63,7 @@ function Home() {
         </p>
 
         <div className="team-section">
-          <p className="team-prompt">Are you ready for your dream team?</p>
+          <h3 className="team-prompt">Are you ready for your dream team?</h3>
           <Link to="/team" className="pokeball-link" title="Go to Team Builder">
             <div className="pokeball">
               <div className="pokeball__button"></div>
